@@ -175,8 +175,8 @@ export default function Home() {
     
     if (!aData || !bData) return 0;
     
-    let aValue: any = aData[sortField];
-    let bValue: any = bData[sortField];
+    let aValue: string | number = aData[sortField] || '';
+    let bValue: string | number = bData[sortField] || '';
     
     if (typeof aValue === 'string') aValue = aValue.toLowerCase();
     if (typeof bValue === 'string') bValue = bValue.toLowerCase();
@@ -203,7 +203,7 @@ export default function Home() {
     setCurrentPage(0);
   };
 
-  const formatValue = (value: any, column: string) => {
+  const formatValue = (value: string | number | undefined, column: string) => {
     if (value === undefined || value === null) return '-';
     
     switch (column) {
@@ -212,13 +212,13 @@ export default function Home() {
       case 'dayLow':
       case 'week52High':
       case 'week52Low':
-        return `$${Number(value).toFixed(2)}`;
+        return `${Number(value).toFixed(2)}`;
       case 'change':
-        return `${Number(value) >= 0 ? '+' : ''}$${Number(value).toFixed(2)}`;
+        return `${Number(value) >= 0 ? '+' : ''}${Number(value).toFixed(2)}`;
       case 'changePercent':
         return `${Number(value) >= 0 ? '+' : ''}${Number(value).toFixed(2)}%`;
       case 'marketCap':
-        return value ? `$${(Number(value) / 1e9).toFixed(1)}B` : '-';
+        return value ? `${(Number(value) / 1e9).toFixed(1)}B` : '-';
       case 'volume':
         return value ? Number(value).toLocaleString() : '-';
       default:
@@ -226,7 +226,7 @@ export default function Home() {
     }
   };
 
-  const getValueColor = (value: any, column: string) => {
+  const getValueColor = (value: string | number | undefined, column: string) => {
     if (column === 'change' || column === 'changePercent') {
       return Number(value) >= 0 ? 'text-green-600' : 'text-red-600';
     }

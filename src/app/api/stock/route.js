@@ -35,7 +35,7 @@ export async function GET(request) {
       if (overviewResponse.ok) {
         overviewData = await overviewResponse.json();
       }
-    } catch (error) {
+    } catch (overviewError) {
       console.log('Overview data not available');
     }
 
@@ -64,8 +64,8 @@ export async function GET(request) {
 
     return Response.json(result);
     
-  } catch (error) {
-    console.error('API Error:', error);
+  } catch (apiError) {
+    console.error('API Error:', apiError);
     return Response.json({ error: 'Failed to fetch stock data' }, { status: 500 });
   }
 }
