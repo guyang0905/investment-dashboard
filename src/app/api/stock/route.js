@@ -32,7 +32,7 @@ export async function GET(request) {
     
     return Response.json({ error: 'No data found for symbol' }, { status: 404 });
     
-  } catch (error) {
+  } catch {
     return Response.json({ error: 'Failed to fetch stock data' }, { status: 500 });
   }
 }

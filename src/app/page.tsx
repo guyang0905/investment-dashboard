@@ -8,6 +8,7 @@ interface StockData {
   change: number;
   changePercent: string;
   source: string;
+  error?: string;
 }
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchStock(symbol);
-  }, []);
+  }, [symbol]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
